@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department of Computer Science · Navigation Portal</title>
+    <style>
+        /* ================= BASE & TYPOGRAPHY ================= */
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; } /* offset for sticky nav */
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            margin: 0;
+            background: #f4f7fb;
+            color: #1b2b3c;
+            line-height: 1.6;
+        }
+        a { color: #0b5ed7; text-decoration: none; }
+        a:hover, a:focus-visible { text-decoration: underline; }
+
+        /* ================= SKIP LINK (accessibility) ================= */
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: 0;
+            background: #0b2e4f;
+            color: #ffffff;
+            padding: 0.7rem 1.2rem;
+            z-index: 200;
+            border-radius: 0 0 8px 0;
+        }
+        .skip-link:focus {
+            left: 0;
+        }
+
+        /* ================= HEADER / BRAND ================= */
+        .site-header {
+            background: linear-gradient(135deg, #0b2e4f 0%, #124a7c 100%);
+            color: #ffffff;
+            padding: 1.4rem 1.6rem 0.9rem;
+        }
+        .brand {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .brand .logo {
+            width: 54px;
+            height: 54px;
+            background: #ffffff;
+            color: #0b2e4f;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 1.35rem;
+            flex-shrink: 0;
+        }
+        .brand h1 {
+            margin: 0;
+            font-size: 1.28rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+        .brand p {
+            margin: 0;
+            font-size: 0.82rem;
+            color: #b9d2ea;
+        }
+
+        /* ================= NAVIGATION MENU ================= */
+        nav.main-nav {
+            background: #08335a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 14px rgba(8, 40, 70, 0.25);
+        }
+        nav.main-nav ul {
+            list-style: none;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem;
+        }
+        nav.main-nav li { margin: 0; }
+        nav.main-nav a {
+            display: block;
+            color: #dce9f5;
+            padding: 0.92rem 1rem;
+            font-size: 0.92rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            border-bottom: 3px solid transparent;
+            transition: background 0.16s, border-color 0.16s, color 0.16s;
+        }
+        nav.main-nav a:hover,
+        nav.main-nav a:focus-visible {
+            background: #0d4474;
+            color: #ffffff;
+            border-bottom-color: #f5b942;
+            text-decoration: none;
+        }
+        /* Current-page indicator */
+        nav.main-nav a[aria-current="page"] {
+            background: #0d4474;
+            color: #ffffff;
+            border-bottom-color: #f5b942;
+        }
+
+        /* ================= MAIN CONTENT ================= */
+        main {
+            max-width: 1120px;
+            margin: 2.4rem auto;
+            padding: 0 1.4rem 3rem;
+        }
+
+        /* Intro card */
+        .hero {
+            background: #ffffff;
+            border: 1px solid #e1eaf3;
+            border-radius: 18px;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 6px 20px rgba(15, 40, 70, 0.06);
+            margin-bottom: 2.2rem;
+        }
+        .hero h2 {
+            margin: 0 0 0.6rem;
+            color: #0b2e4f;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        .hero p { margin: 0 0 0.8rem; color: #3e556d; }
+
+        /* Content sections (targets of the navigation menu) */
+        section.portal-section {
+            background: #ffffff;
+            border: 1px solid #e3ebf4;
+            border-radius: 16px;
+            padding: 1.7rem 1.9rem;
+            margin-bottom: 1.4rem;
+            scroll-margin-top: 84px;   /* keeps heading visible below sticky nav */
+        }
+        section.portal-section h2 {
+            margin: 0 0 0.4rem;
+            color: #0b2e4f;
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+        section.portal-section h2 .num {
+            background: #e7f0fa;
+            color: #0b5ed7;
+            font-size: 0.85rem;
+            font-weight: 700;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+        section.portal-section p { margin: 0.3rem 0 0.9rem; color: #45596e; font-size: 0.95rem; }
+
+        /* Quick-link pills inside sections */
+        .quick-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .quick-links a {
+            background: #eef5fc;
+            border: 1px solid #d2e3f4;
+            color: #0b5ed7;
+            font-size: 0.86rem;
+            font-weight: 500;
+            padding: 0.42rem 0.95rem;
+            border-radius: 30px;
+            transition: background 0.16s, border-color 0.16s;
+        }
+        .quick-links a:hover {
+            background: #dcebfa;
+            border-color: #a8cbee;
+            text-decoration: none;
+        }
+        /* "Back to top" styling */
+        .back-top {
+            display: inline-block;
+            margin-top: 0.9rem;
+            font-size: 0.82rem;
+            color: #5b7590;
+        }
+        .back-top:hover { color: #0b5ed7; }
+
+        /* External-link marker */
+        a[target="_blank"]::after {
+            content: " ↗";
+            font-size: 0.78em;
+            opacity: 0.7;
+        }
+
+        /* ================= FOOTER ================= */
+        footer.site-footer {
+            background: #0b2e4f;
+            color: #c4d8ec;
+            padding: 1.8rem 1.6rem;
+            text-align: center;
+            font-size: 0.88rem;
+        }
+        footer.site-footer a { color: #a9cdf0; }
+        footer.site-footer .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.4rem 1.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 720px) {
+            nav.main-nav ul {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 2px;
+                -webkit-overflow-scrolling: touch;
+            }
+            nav.main-nav a { padding: 0.85rem 0.8rem; font-size: 0.86rem; white-space: nowrap; }
+            .hero { padding: 1.5rem 1.3rem; }
+            section.portal-section { padding: 1.3rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= SKIP TO CONTENT (accessibility) ================= -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- ================= SITE HEADER ================= -->
+    <header class="site-header">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">CS</div>
+            <div>
+                <h1>Department of Computer Science</h1>
+                <p>National Institute of Technology · Trichy</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         MAIN NAVIGATION MENU
+         - <nav>   : semantic landmark for navigation
+         - <ul>/<li> : the menu is a list of links
+         - href="#..." : INTERNAL links (in-page anchors)
+         - aria-current="page" : marks the active item
+         - Each link jumps to a matching section on this page
+         ============================================================ -->
+    <nav class="main-nav" aria-label="Department sections">
+        <ul>
+            <li><a href="#home" aria-current="page">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#faculty">Faculty</a></li>
+            <li><a href="#labs">Labs</a></li>
+            <li><a href="#assignments">Assignments</a></li>
+            <li><a href="#notices">Notices</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main id="main-content">
+
+        <!-- ---------- HERO / INTRO ---------- -->
+        <div class="hero" id="home">
+            <h2>Welcome to the Department Portal</h2>
+            <p>
+                This page is the central navigation hub for students, faculty, and visitors.
+                Use the menu above to jump to any section. Every item in the navigation bar
+                is an <strong>internal link</strong> (it scrolls to a section on this same page).
+            </p>
+            <p>
+                Looking for something outside the department? Visit the
+                <a href="https://www.nitt.edu" target="_blank" rel="noopener noreferrer">institute homepage</a>
+                — an <strong>external link</strong> that opens a different website in a new tab.
+            </p>
+        </div>
+
+        <!-- ---------- 1 · ABOUT ---------- -->
+        <section class="portal-section" id="about" aria-labelledby="about-heading">
+            <h2 id="about-heading"><span class="num" aria-hidden="true">1</span> About the Department</h2>
+            <p>
+                Established in 1985, the Department of Computer Science offers undergraduate
+                and postgraduate programmes, fosters research in AI, networks, and software
+                engineering, and hosts a vibrant student community.
+            </p>
+            <div class="quick-links">
+                <a href="https://www.nitt.edu/home/academics/departments/cs/" target="_blank" rel="noopener noreferrer">
+                    Official department profile
+                </a>
+                <a href="#contact">Reach the department office</a>
+            </div>
+            <a href="#home" class="back-top">↑ Back to top</a>
+        </section>
+
+        <!-- ---------- 2 · COURSES ---------- -->
+        <section class="portal-section" id="courses" aria-labelledby="courses-heading">
+            <h2 id="courses-heading"><span class="num" aria-hidden="true">2</span> Courses</h2>
+            <p>
+                Explore B.Tech, M.Tech, and Ph.D. programmes, along with elective subjects
+                covering data structures, operating systems, databases, and machine learning.
+            </p>
+            <div class="quick-links">
+                <a href="https://www.nitt.edu/home/academics/departments/cs/programmes/" target="_blank" rel="noopener noreferrer">
+                    Programme catalogue
+                </a>
+                <a href="#assignments">View current assignments</a>
+            </div>
+            <a href="#home" class="back-top">↑ Back to top</a>
+        </section>
+
+        <!-- ---------- 3 · FACULTY ---------- -->
+        <section class="portal-section" id="faculty" aria-labelledby="faculty-heading">
+            <h2 id="faculty-heading"><span class="num" aria-hidden="true">3</span> Faculty</h2>
+            <p>
+                Meet our professors, associate professors, and visiting researchers.
+                Each profile lists teaching areas, publications, and office hours.
+            </p>
+            <div class="quick-links">
+                <a href="https://www.nitt.edu/home/academics/departments/cs/faculty/" target="_blank" rel="noopener noreferrer">
+                    Faculty directory
+                </a>
+                <a href="#contact">Contact a faculty member</a>
+            </div>
+            <a href="#home" class="back-top">↑ Back to top</a>
+        </section>
+
+        <!-- ---------- 4 · LABS ---------- -->
+        <section class="portal-section" id="labs" aria-labelledby="labs-heading">
+            <h2 id="labs-heading"><span class="num" aria-hidden="true">4</span> Laboratories</h2>
+            <p>
+                Our labs include the Programming Lab, Networking Lab, AI &amp; Data Science Lab,
+                and the Hardware &amp; IoT Lab. Each lab page lists equipment and safety guidelines.
+            </p>
+            <div class="quick-links">
+                <a href="#gallery">See lab photos in the gallery</a>
+                <a href="#notices">Check lab schedules in notices</a>
+            </div>
+            <a href="#home" class="back-top">↑ Back to top</a>
+        </section>
+
+        <!-- ---------- 5 · ASSIGNMENTS ---------- -->
+        <section class="portal-section" id="assignments" aria-labelledby="assignments-heading">
+            <h2 id="assignments-heading"><span class="num" aria-hidden="true">5</span> Assignments</h2>
+            <p>
+                Submit coursework, download problem sets, and track deadlines.
+                Log in with your student credentials to access the submission portal.
+            </p>
+            <div class="quick-links">
+                <a href="https://moodle.example.edu" target="_blank" rel="noopener noreferrer">
+                    Open Moodle portal
+                </a>
+                <a href="#courses">Review course list</a>
+            </div>
+            <a href="#home" class="back-top">↑ Back to top</a>
+        </section>
+
+        <!-- ---------- 6 · NOTICES ---------- -->
+        <section class="portal-section" id="notices" aria-labelledby="notices-heading">
+            <h2 id="notices-heading"><span class="num" aria-hidden="true">6</span> Notices</h2>
+            <p>
+                Announcements about examinations, results, seminar schedules, and department
+                events. Notice PDFs are updated weekly.
+            </p>
+            <div class="quick-links">
+                <a href="https://www.nitt.edu/home/notices/" target="_blank" rel="noopener noreferrer">
+                    Institute notice board
+                </a>
+                <a href="#contact">Ask the office a question</a>
+            </div>
+            <a href="#home" class="back-top">↑ Back to top</a>
+        </section>
+
+        <!-- ---------- 7 · GALLERY ---------- -->
+        <section class="portal-section" id="gallery" aria-labelledby="gallery-heading">
+            <h2 id="gallery-heading"><span class="num" aria-hidden="true">7</span> Gallery</h2>
+            <p>
+                Photos from TechFest, lab sessions, guest lectures, and graduation day.
+                Click any image to view the full album.
+            </p>
+            <div class="quick-links">
+                <a href="https://www.flickr.com" target="_blank" rel="noopener noreferrer">
+                    Photo albums on Flickr
+                </a>
+                <a href="#labs">Learn about our labs</a>
+            </div>
+            <a href="#home" class="back-top">↑ Back to top</a>
+        </section>
+
+        <!-- ---------- 8 · CONTACT ---------- -->
+        <section class="portal-section" id="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading"><span class="num" aria-hidden="true">8</span> Contact</h2>
+            <p>
+                Reach the department office by email, phone, or in person.
+                For admissions queries, use the central admissions office link below.
+            </p>
+            <div class="quick-links">
+                <!-- mailto and tel are special internal-style protocols -->
+                <a href="mailto:cs.office@nitt.edu">cs.office@nitt.edu</a>
+                <a href="tel:+914312501234">+91 431 250 1234</a>
+                <a href="https://www.nitt.edu/home/admissions/" target="_blank" rel="noopener noreferrer">
+                    Admissions office
+                </a>
+            </div>
+            <a href="#home" class="back-top">↑ Back to top</a>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#courses">Courses</a>
+            <a href="#faculty">Faculty</a>
+            <a href="#labs">Labs</a>
+            <a href="#assignments">Assignments</a>
+            <a href="#notices">Notices</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p>
+            © 2025 Department of Computer Science · National Institute of Technology, Trichy<br>
+            <a href="https://www.nitt.edu" target="_blank" rel="noopener noreferrer">Visit the institute website</a>
+        </p>
+    </footer>
+
+</body>
+</html>

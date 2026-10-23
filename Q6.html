@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department of Computer Science · Semantic Page</title>
+    <style>
+        /* ================= BASE & TYPOGRAPHY ================= */
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            margin: 0;
+            background: #f3f7fb;
+            color: #1b2b3c;
+            line-height: 1.65;
+        }
+        a { color: #0b5ed7; text-decoration: none; }
+        a:hover, a:focus-visible { text-decoration: underline; }
+
+        /* ================= SKIP LINK ================= */
+        .skip-link {
+            position: absolute; left: -999px; top: 0;
+            background: #0b2e4f; color: #fff;
+            padding: 0.7rem 1.2rem; z-index: 300;
+            border-radius: 0 0 8px 0;
+        }
+        .skip-link:focus { left: 0; }
+
+        /* ================= HEADER ================= */
+        header.site-header {
+            background: linear-gradient(135deg, #0b2e4f 0%, #124a7c 100%);
+            color: #fff;
+            padding: 1.6rem 1.6rem 1.2rem;
+        }
+        .brand {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .brand .logo {
+            width: 58px; height: 58px;
+            background: #fff; color: #0b2e4f;
+            border-radius: 50%;
+            display: grid; place-items: center;
+            font-weight: 700; font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .brand h1 { margin: 0; font-size: 1.35rem; font-weight: 600; }
+        .brand p  { margin: 0; font-size: 0.85rem; color: #b9d2ea; }
+
+        /* ================= NAV ================= */
+        nav.main-nav {
+            background: #08335a;
+            position: sticky; top: 0; z-index: 200;
+            box-shadow: 0 3px 14px rgba(8,40,70,0.25);
+        }
+        nav.main-nav ul {
+            list-style: none;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 0.8rem;
+            display: flex; flex-wrap: wrap; gap: 0.2rem;
+        }
+        nav.main-nav a {
+            display: block;
+            color: #dce9f5;
+            padding: 0.9rem 1rem;
+            font-size: 0.92rem; font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: background 0.16s, border-color 0.16s, color 0.16s;
+        }
+        nav.main-nav a:hover,
+        nav.main-nav a:focus-visible {
+            background: #0d4474; color: #fff;
+            border-bottom-color: #f5b942;
+            text-decoration: none;
+        }
+        nav.main-nav a[aria-current="page"] {
+            background: #0d4474; color: #fff;
+            border-bottom-color: #f5b942;
+        }
+
+        /* ================= MAIN LAYOUT ================= */
+        main {
+            max-width: 1180px;
+            margin: 2.4rem auto;
+            padding: 0 1.4rem 2.4rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;   /* content + aside */
+            gap: 1.8rem;
+            align-items: start;
+        }
+        @media (max-width: 860px) {
+            main { grid-template-columns: 1fr; }
+        }
+
+        /* ---------- sections ---------- */
+        section {
+            background: #fff;
+            border: 1px solid #e3ebf4;
+            border-radius: 16px;
+            padding: 1.7rem 1.9rem;
+            margin-bottom: 1.6rem;
+            box-shadow: 0 5px 16px rgba(15,40,70,0.05);
+        }
+        section h2 {
+            margin: 0 0 0.6rem;
+            color: #0b2e4f;
+            font-size: 1.35rem;
+            font-weight: 600;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        section h2 .badge {
+            background: #e7f0fa; color: #0b5ed7;
+            font-size: 0.72rem; font-weight: 700;
+            padding: 0.2rem 0.6rem; border-radius: 20px;
+            text-transform: uppercase; letter-spacing: 0.6px;
+        }
+
+        /* ---------- articles ---------- */
+        article {
+            background: #fbfdff;
+            border-left: 4px solid #2f7bd6;
+            border-radius: 0 12px 12px 0;
+            padding: 1.1rem 1.3rem;
+            margin: 1rem 0;
+        }
+        article h3 {
+            margin: 0 0 0.35rem;
+            font-size: 1.08rem;
+            color: #123b5e;
+        }
+        article .meta {
+            font-size: 0.8rem;
+            color: #7186a0;
+            margin: 0 0 0.6rem;
+        }
+        article p { margin: 0 0 0.5rem; font-size: 0.95rem; color: #3e556d; }
+
+        /* ---------- aside ---------- */
+        aside {
+            background: #fff;
+            border: 1px solid #e3ebf4;
+            border-radius: 16px;
+            padding: 1.5rem 1.6rem;
+            box-shadow: 0 5px 16px rgba(15,40,70,0.05);
+            position: sticky; top: 92px;
+        }
+        aside h2 {
+            margin: 0 0 0.8rem;
+            font-size: 1.08rem;
+            color: #0b2e4f;
+            border-bottom: 2px solid #e7f0fa;
+            padding-bottom: 0.5rem;
+        }
+        aside ul {
+            list-style: none; padding: 0; margin: 0 0 1rem;
+        }
+        aside li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #e2eaf3;
+            font-size: 0.9rem;
+            color: #40536b;
+        }
+        aside li:last-child { border-bottom: none; }
+        aside .callout {
+            background: #fff8e8;
+            border: 1px solid #f0dcae;
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            font-size: 0.85rem;
+            color: #7a5b13;
+        }
+
+        /* ================= FOOTER ================= */
+        footer.site-footer {
+            background: #0b2e4f;
+            color: #c4d8ec;
+            padding: 2rem 1.6rem;
+            font-size: 0.88rem;
+        }
+        .footer-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.6rem;
+        }
+        footer.site-footer h3 {
+            color: #fff;
+            font-size: 0.95rem;
+            margin: 0 0 0.6rem;
+            font-weight: 600;
+        }
+        footer.site-footer ul { list-style: none; margin: 0; padding: 0; }
+        footer.site-footer li { margin-bottom: 0.35rem; }
+        footer.site-footer a { color: #a9cdf0; }
+        .footer-bottom {
+            max-width: 1180px;
+            margin: 1.6rem auto 0;
+            padding-top: 1rem;
+            border-top: 1px solid #1a4670;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #9fb8d1;
+        }
+
+        /* external link marker */
+        a[target="_blank"]::after {
+            content: " ↗";
+            font-size: 0.78em;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         SKIP LINK — accessibility shortcut for keyboard users
+         ============================================================ -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- ============================================================
+         <header> — introductory banner of the page
+         Contains the site identity (logo, department name, tagline).
+         There is exactly one <header> as a direct child of <body>
+         (a page-level header). It is a "banner" landmark.
+         ============================================================ -->
+    <header class="site-header">
+        <div class="brand">
+            <div class="logo" aria-hidden="true">CS</div>
+            <div>
+                <h1>Department of Computer Science</h1>
+                <p>National Institute of Technology · Trichy</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         <nav> — major navigation block
+         Wrapped in a landmark with an aria-label, its links take
+         users to the page's main sections.
+         ============================================================ -->
+    <nav class="main-nav" aria-label="Primary">
+        <ul>
+            <li><a href="#about" aria-current="page">About</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#faculty">Faculty</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ============================================================
+         <main> — the dominant content of the page
+         There must be only ONE visible <main> per page.
+         Everything that is "the point of this page" lives here.
+         ============================================================ -->
+    <main id="main-content">
+
+        <!-- ---------- SECTION: About ---------- -->
+        <section id="about" aria-labelledby="about-heading">
+            <h2 id="about-heading">About the Department <span class="badge">Overview</span></h2>
+            <p>
+                Founded in 1985, the Department of Computer Science offers undergraduate,
+                postgraduate, and doctoral programmes. Our faculty and students work across
+                artificial intelligence, networking, software engineering, and human–computer
+                interaction.
+            </p>
+            <p>
+                We are committed to rigorous teaching, impactful research, and an inclusive
+                community where every student can thrive.
+            </p>
+        </section>
+
+        <!-- ---------- SECTION: Programs (contains ARTICLES) ---------- -->
+        <section id="programs" aria-labelledby="programs-heading">
+            <h2 id="programs-heading">Programs Offered <span class="badge">Academics</span></h2>
+
+            <!-- ARTICLE 1 — self-contained piece of content -->
+            <article>
+                <h3>B.Tech in Computer Science &amp; Engineering</h3>
+                <p class="meta">Undergraduate · 4 years · 60 seats</p>
+                <p>
+                    A rigorous foundation in algorithms, systems, databases, and software
+                    engineering, with electives in AI, security, and cloud computing.
+                </p>
+                <p><a href="https://www.nitt.edu" target="_blank" rel="noopener noreferrer">Programme details</a></p>
+            </article>
+
+            <!-- ARTICLE 2 — independent, could be syndicated on its own -->
+            <article>
+                <h3>M.Tech in Data Science</h3>
+                <p class="meta">Postgraduate · 2 years · 30 seats</p>
+                <p>
+                    Advanced study in machine learning, big-data systems, and statistical
+                    inference, culminating in a research thesis.
+                </p>
+                <p><a href="#contact">Contact admissions</a></p>
+            </article>
+
+            <!-- ARTICLE 3 -->
+            <article>
+                <h3>Ph.D. in Computer Science</h3>
+                <p class="meta">Doctoral · 3–5 years · Rolling admissions</p>
+                <p>
+                    Research-driven programme spanning core CS and interdisciplinary
+                    collaborations with engineering and the sciences.
+                </p>
+            </article>
+        </section>
+
+        <!-- ---------- SECTION: News (also contains ARTICLES) ---------- -->
+        <section id="news" aria-labelledby="news-heading">
+            <h2 id="news-heading">Latest News &amp; Events <span class="badge">Updates</span></h2>
+
+            <article>
+                <h3>TechFest 2025 announced</h3>
+                <p class="meta">Posted 12 March 2025 · Events</p>
+                <p>
+                    The annual technology festival returns on 12–14 March with hackathons,
+                    robotics demos, and a keynote on AI in everyday life.
+                </p>
+            </article>
+
+            <article>
+                <h3>Faculty paper accepted at ICDE 2025</h3>
+                <p class="meta">Posted 8 March 2025 · Research</p>
+                <p>
+                    A paper on query optimization for distributed databases has been
+                    accepted at the International Conference on Data Engineering.
+                </p>
+            </article>
+        </section>
+
+        <!-- ---------- SECTION: Faculty ---------- -->
+        <section id="faculty" aria-labelledby="faculty-heading">
+            <h2 id="faculty-heading">Faculty <span class="badge">People</span></h2>
+            <p>
+                Our department brings together 28 full-time faculty members, several visiting
+                researchers, and postdoctoral fellows. Each profile lists teaching areas,
+                publications, and office hours.
+            </p>
+            <p>
+                <a href="https://www.nitt.edu/home/academics/departments/cs/faculty/" target="_blank" rel="noopener noreferrer">
+                    Full faculty directory
+                </a>
+            </p>
+        </section>
+
+        <!-- ---------- SECTION: Contact ---------- -->
+        <section id="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact <span class="badge">Get in touch</span></h2>
+            <p>
+                Department office: <a href="mailto:cs.office@nitt.edu">cs.office@nitt.edu</a> ·
+                <a href="tel:+914312501234">+91 431 250 1234</a>
+            </p>
+            <p>
+                Visit us at the Computer Science building, NIT Trichy campus,
+                Tiruchirappalli, Tamil Nadu 620015.
+            </p>
+        </section>
+
+        <!-- ============================================================
+             <aside> — tangentially related content
+             It supports the main content but is not essential to it.
+             Screen readers can skip to it via the "complementary" landmark.
+             ============================================================ -->
+        <aside aria-label="Department highlights and quick links">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="#programs">Explore programmes</a></li>
+                <li><a href="#news">Read the latest news</a></li>
+                <li><a href="#faculty">Meet the faculty</a></li>
+                <li><a href="#contact">Contact the office</a></li>
+            </ul>
+
+            <h2>Announcements</h2>
+            <ul>
+                <li>📅 Semester IV exams begin 20 April</li>
+                <li>📢 TechFest registration closes 25 March</li>
+                <li>🎓 Convocation on 10 June 2025</li>
+            </ul>
+
+            <div class="callout">
+                <strong>Applying?</strong> Applications for the 2025–26 academic year are open.
+                <a href="https://www.nitt.edu" target="_blank" rel="noopener noreferrer">Apply online</a>.
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- ============================================================
+         <footer> — closing content for the page
+         Contains copyright, contact links, and secondary navigation.
+         It is a "contentinfo" landmark.
+         ============================================================ -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <h3>Department</h3>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#faculty">Faculty</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://www.nitt.edu" target="_blank" rel="noopener noreferrer">Institute homepage</a></li>
+                    <li><a href="#news">News &amp; events</a></li>
+                    <li><a href="#contact">Admissions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Get in touch</h3>
+                <ul>
+                    <li><a href="mailto:cs.office@nitt.edu">cs.office@nitt.edu</a></li>
+                    <li><a href="tel:+914312501234">+91 431 250 1234</a></li>
+                    <li>CS Building, NIT Trichy</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 Department of Computer Science · National Institute of Technology, Trichy
+        </div>
+    </footer>
+
+</body>
+</html>

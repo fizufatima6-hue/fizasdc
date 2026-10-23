@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Timetable · Semester IV · Section A</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f4f6fa;
+            color: #1a2332;
+            margin: 2rem auto;
+            max-width: 1150px;
+            padding: 0 1.2rem;
+            line-height: 1.5;
+        }
+        h1 { text-align: center; margin-bottom: 0.2rem; font-weight: 600; color: #0b2e4f; }
+        .subtitle { text-align: center; color: #4b5f75; margin-bottom: 2rem; font-size: 1rem; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            font-size: 0.94rem;
+        }
+        caption {
+            caption-side: top;
+            font-size: 1.15rem;
+            font-weight: 600;
+            padding: 0.8rem 0 1.2rem;
+            color: #123b5e;
+            text-align: center;
+        }
+        thead th {
+            background: #0b2e4f;
+            color: #ffffff;
+            font-weight: 500;
+            padding: 0.9rem 0.6rem;
+            text-align: center;
+            border: 1px solid #1a4670;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+        tbody td, tbody th {
+            border: 1px solid #d7e0ea;
+            padding: 0.7rem 0.6rem;
+            vertical-align: middle;
+            text-align: center;
+        }
+        /* Day column (row headers) */
+        tbody th[scope="row"] {
+            background: #eaf1f9;
+            font-weight: 600;
+            color: #0b2e4f;
+            width: 110px;
+        }
+        /* Time-period row headers (first column in header) */
+        thead th[scope="col"]:first-child {
+            background: #0a2540;
+        }
+        .subject {
+            font-weight: 600;
+            color: #123b5e;
+            display: block;
+        }
+        .faculty {
+            font-size: 0.8rem;
+            color: #5e7185;
+            display: block;
+            margin-top: 0.15rem;
+        }
+        .lab {
+            background: #fff8e8;
+            font-style: normal;
+        }
+        .lab .subject { color: #925c00; }
+        .lab .faculty { color: #a07222; }
+        .break {
+            background: #e8f3ea;
+            color: #1e6b37;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .lunch {
+            background: #fdf2dc;
+            color: #8a6200;
+            font-weight: 600;
+        }
+        /* Legend */
+        .legend {
+            margin-top: 1.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.4rem;
+            font-size: 0.88rem;
+            color: #374a5e;
+            background: #ffffff;
+            padding: 1rem 1.4rem;
+            border-radius: 12px;
+            border: 1px solid #e2e9f1;
+        }
+        .legend span::before {
+            content: "■";
+            margin-right: 0.45rem;
+            font-size: 1rem;
+            vertical-align: -2px;
+        }
+        .legend .theory::before { color: #3a7bbf; }
+        .legend .lab-key::before { color: #d98e04; }
+        .legend .break-key::before { color: #2b8a4b; }
+        .legend .lunch-key::before { color: #c9931c; }
+        /* Mobile: allow horizontal scroll instead of breaking layout */
+        @media (max-width: 760px) {
+            body { padding: 0 0.6rem; }
+            table { font-size: 0.82rem; }
+            tbody th[scope="row"] { width: 70px; font-size: 0.82rem; }
+            thead th { padding: 0.6rem 0.3rem; font-size: 0.78rem; }
+            tbody td { padding: 0.5rem 0.3rem; }
+            .faculty { font-size: 0.68rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>University Timetable</h1>
+    <p class="subtitle">Bachelor of Computer Applications (BCA) · Semester IV · Section A · Academic Year 2025–26</p>
+
+    <!-- ============================================================
+         THE TIMETABLE TABLE
+         - <caption>        : table title / accessible description
+         - <colgroup>/<col> : width hints for Day + 8 slots
+         - <thead>          : column headers (days & periods)
+         - <tbody>          : data rows (Mon–Sat)
+         - rowspan          : a lab spanning two consecutive periods
+         - colspan          : "LUNCH BREAK" spanning all period columns
+         ============================================================ -->
+    <table>
+        <caption>
+            BCA Semester IV — Weekly Class Timetable (Theory &amp; Lab)
+        </caption>
+
+        <!-- Column widths: Day + 8 periods (Period 1–7 + 1 break slot) -->
+        <colgroup>
+            <col style="width: 11%;">
+            <col span="8">
+        </colgroup>
+
+        <!-- ---------- HEADER: days × periods ---------- -->
+        <thead>
+            <tr>
+                <th scope="col">Day / Period</th>
+                <th scope="col">I<br><small>9:00–9:50</small></th>
+                <th scope="col">II<br><small>9:50–10:40</small></th>
+                <th scope="col">III<br><small>10:40–11:30</small></th>
+                <th scope="col">IV<br><small>11:30–12:20</small></th>
+                <th scope="col" class="break">Break<br><small>12:20–12:50</small></th>
+                <th scope="col">V<br><small>12:50–1:40</small></th>
+                <th scope="col">VI<br><small>1:40–2:30</small></th>
+                <th scope="col">VII<br><small>2:30–3:20</small></th>
+            </tr>
+        </thead>
+
+        <!-- ---------- BODY: each row = one day ---------- -->
+        <tbody>
+
+            <!-- ============ MONDAY ============ -->
+            <tr>
+                <th scope="row">Monday</th>
+                <!-- Period I -->
+                <td>
+                    <span class="subject">Data Structures</span>
+                    <span class="faculty">Dr. R. Sharma</span>
+                </td>
+                <!-- Period II -->
+                <td>
+                    <span class="subject">Data Structures</span>
+                    <span class="faculty">Dr. R. Sharma</span>
+                </td>
+                <!-- Period III: LAB spanning 2 periods via rowspan -->
+                <td class="lab" colspan="2">
+                    <span class="subject">DS Lab</span>
+                    <span class="faculty">Lab 2 · Ms. P. Nair</span>
+                </td>
+                <!-- Period IV is consumed by rowspan above (no cell here) -->
+                <!-- Break column -->
+                <td class="break">BREAK</td>
+                <!-- Period V -->
+                <td>
+                    <span class="subject">Operating Systems</span>
+                    <span class="faculty">Prof. A. Iyer</span>
+                </td>
+                <!-- Period VI -->
+                <td>
+                    <span class="subject">Operating Systems</span>
+                    <span class="faculty">Prof. A. Iyer</span>
+                </td>
+                <!-- Period VII -->
+                <td>
+                    <span class="subject">Java Programming</span>
+                    <span class="faculty">Mr. V. Kulkarni</span>
+                </td>
+            </tr>
+
+            <!-- ============ TUESDAY ============ -->
+            <tr>
+                <th scope="row">Tuesday</th>
+                <td>
+                    <span class="subject">Computer Networks</span>
+                    <span class="faculty">Dr. S. Bose</span>
+                </td>
+                <td>
+                    <span class="subject">Web Technology</span>
+                    <span class="faculty">Ms. K. Reddy</span>
+                </td>
+                <td>
+                    <span class="subject">Discrete Mathematics</span>
+                    <span class="faculty">Dr. M. Joshi</span>
+                </td>
+                <td>
+                    <span class="subject">Discrete Mathematics</span>
+                    <span class="faculty">Dr. M. Joshi</span>
+                </td>
+                <td class="break">BREAK</td>
+                <!-- LAB spanning Periods V & VI (2 periods) -->
+                <td class="lab" colspan="2">
+                    <span class="subject">Networking Lab</span>
+                    <span class="faculty">Lab 1 · Dr. S. Bose</span>
+                </td>
+                <!-- Period VII -->
+                <td>
+                    <span class="subject">Library / Self‑Study</span>
+                    <span class="faculty">—</span>
+                </td>
+            </tr>
+
+            <!-- ============ WEDNESDAY ============ -->
+            <tr>
+                <th scope="row">Wednesday</th>
+                <td>
+                    <span class="subject">Java Programming</span>
+                    <span class="faculty">Mr. V. Kulkarni</span>
+                </td>
+                <td>
+                    <span class="subject">Computer Networks</span>
+                    <span class="faculty">Dr. S. Bose</span>
+                </td>
+                <td>
+                    <span class="subject">Software Engineering</span>
+                    <span class="faculty">Prof. N. Desai</span>
+                </td>
+                <td>
+                    <span class="subject">Software Engineering</span>
+                    <span class="faculty">Prof. N. Desai</span>
+                </td>
+                <td class="break">BREAK</td>
+                <td>
+                    <span class="subject">Operating Systems</span>
+                    <span class="faculty">Prof. A. Iyer</span>
+                </td>
+                <!-- LAB spanning Periods VI & VII -->
+                <td class="lab" colspan="2">
+                    <span class="subject">Java Lab</span>
+                    <span class="faculty">Lab 3 · Mr. V. Kulkarni</span>
+                </td>
+            </tr>
+
+            <!-- ============ THURSDAY ============ -->
+            <tr>
+                <th scope="row">Thursday</th>
+                <td>
+                    <span class="subject">Discrete Mathematics</span>
+                    <span class="faculty">Dr. M. Joshi</span>
+                </td>
+                <td>
+                    <span class="subject">Data Structures</span>
+                    <span class="faculty">Dr. R. Sharma</span>
+                </td>
+                <td>
+                    <span class="subject">Web Technology</span>
+                    <span class="faculty">Ms. K. Reddy</span>
+                </td>
+                <td>
+                    <span class="subject">Web Technology</span>
+                    <span class="faculty">Ms. K. Reddy</span>
+                </td>
+                <td class="break">BREAK</td>
+                <td>
+                    <span class="subject">Software Engineering</span>
+                    <span class="faculty">Prof. N. Desai</span>
+                </td>
+                <td>
+                    <span class="subject">Computer Networks</span>
+                    <span class="faculty">Dr. S. Bose</span>
+                </td>
+                <td>
+                    <span class="subject">Mentoring / Seminar</span>
+                    <span class="faculty">Faculty Advisor</span>
+                </td>
+            </tr>
+
+            <!-- ============ FRIDAY ============ -->
+            <tr>
+                <th scope="row">Friday</th>
+                <td>
+                    <span class="subject">Operating Systems</span>
+                    <span class="faculty">Prof. A. Iyer</span>
+                </td>
+                <td>
+                    <span class="subject">Java Programming</span>
+                    <span class="faculty">Mr. V. Kulkarni</span>
+                </td>
+                <td>
+                    <span class="subject">Data Structures</span>
+                    <span class="faculty">Dr. R. Sharma</span>
+                </td>
+                <td>
+                    <span class="subject">Discrete Mathematics</span>
+                    <span class="faculty">Dr. M. Joshi</span>
+                </td>
+                <td class="break">BREAK</td>
+                <!-- LAB spanning Periods V & VI -->
+                <td class="lab" colspan="2">
+                    <span class="subject">Web Technology Lab</span>
+                    <span class="faculty">Lab 4 · Ms. K. Reddy</span>
+                </td>
+                <!-- Period VII -->
+                <td>
+                    <span class="subject">Library / Project Work</span>
+                    <span class="faculty">—</span>
+                </td>
+            </tr>
+
+            <!-- ============ SATURDAY ============ -->
+            <tr>
+                <th scope="row">Saturday</th>
+                <td>
+                    <span class="subject">Software Engineering</span>
+                    <span class="faculty">Prof. N. Desai</span>
+                </td>
+                <td>
+                    <span class="subject">Operating Systems</span>
+                    <span class="faculty">Prof. A. Iyer</span>
+                </td>
+                <td>
+                    <span class="subject">Computer Networks</span>
+                    <span class="faculty">Dr. S. Bose</span>
+                </td>
+                <td>
+                    <span class="subject">Java Programming</span>
+                    <span class="faculty">Mr. V. Kulkarni</span>
+                </td>
+                <td class="break">BREAK</td>
+                <!-- COMBINED LAB spanning all remaining periods (V, VI, VII) -->
+                <td class="lab" colspan="3">
+                    <span class="subject">Mini Project / Innovation Lab</span>
+                    <span class="faculty">Lab 5 · All Faculty · combined session</span>
+                </td>
+            </tr>
+
+            <!-- ============ LUNCH ROW (spanning all period columns) ============ -->
+            <tr>
+                <th scope="row">Lunch</th>
+                <td colspan="8" class="lunch">
+                    🍽️ LUNCH BREAK — 12:20 PM to 12:50 PM (all days) · Common for BCA Section A
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <!-- ---------- LEGEND ---------- -->
+    <div class="legend">
+        <span class="theory">Theory lecture (1 period)</span>
+        <span class="lab-key">Lab / practical (2–3 periods, rowspan/colspan)</span>
+        <span class="break-key">Short break</span>
+        <span class="lunch-key">Lunch break (colspan row)</span>
+    </div>
+
+</body>
+</html>

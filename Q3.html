@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        /* ---------- Page & typography ---------- */
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #eef2f7;
+            color: #1b2b3c;
+            margin: 0;
+            padding: 2rem 1rem;
+            line-height: 1.55;
+        }
+
+        /* ---------- Card container ---------- */
+        .form-card {
+            max-width: 760px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 2rem 2.4rem 2.6rem;
+            box-shadow: 0 10px 34px rgba(15, 40, 70, 0.10);
+            border: 1px solid #e3ebf4;
+        }
+
+        /* ---------- Headings ---------- */
+        h1 {
+            font-size: 1.75rem;
+            color: #0b2e4f;
+            margin: 0 0 0.25rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+        .subtitle {
+            margin: 0 0 2rem;
+            color: #5b6f84;
+            font-size: 0.95rem;
+        }
+
+        /* ---------- Fieldsets (grouping) ---------- */
+        fieldset {
+            border: 1px solid #dbe5ef;
+            border-radius: 12px;
+            padding: 1.1rem 1.4rem 1.4rem;
+            margin: 0 0 1.6rem;
+            background: #fbfdff;
+        }
+        legend {
+            font-weight: 600;
+            color: #0b2e4f;
+            padding: 0 0.55rem;
+            font-size: 0.98rem;
+        }
+
+        /* ---------- Field rows ---------- */
+        .field {
+            margin-bottom: 1.15rem;
+        }
+        label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.92rem;
+            color: #24415f;
+            margin-bottom: 0.35rem;
+        }
+        .req {
+            color: #c0392b;
+            font-weight: 700;
+            margin-left: 2px;
+        }
+
+        /* ---------- Inputs ---------- */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="file"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.68rem 0.85rem;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: #1b2b3c;
+            background: #ffffff;
+            border: 1px solid #c9d6e4;
+            border-radius: 9px;
+            transition: border-color 0.18s, box-shadow 0.18s;
+        }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2f7bd6;
+            box-shadow: 0 0 0 3px rgba(47, 123, 214, 0.16);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 84px;
+        }
+
+        /* Inputs with inline note (e.g., password hint) */
+        .hint {
+            display: block;
+            font-size: 0.78rem;
+            color: #7186a0;
+            margin-top: 0.32rem;
+        }
+
+        /* ---------- Radio / Checkbox groups ---------- */
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem 1.5rem;
+            padding-top: 0.15rem;
+        }
+        .options label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-weight: 400;
+            font-size: 0.92rem;
+            color: #24384d;
+            margin: 0;
+            cursor: pointer;
+        }
+        input[type="radio"],
+        input[type="checkbox"] {
+            accent-color: #2f7bd6;
+            width: 1.05rem;
+            height: 1.05rem;
+            cursor: pointer;
+        }
+
+        /* ---------- File input ---------- */
+        input[type="file"] {
+            padding: 0.5rem 0.7rem;
+            background: #f7fafd;
+            cursor: pointer;
+        }
+        input[type="file"]::file-selector-button {
+            font-family: inherit;
+            font-size: 0.86rem;
+            font-weight: 500;
+            color: #ffffff;
+            background: #2f7bd6;
+            border: none;
+            border-radius: 7px;
+            padding: 0.45rem 0.95rem;
+            margin-right: 0.9rem;
+            cursor: pointer;
+            transition: background 0.18s;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background: #1d5fae;
+        }
+
+        /* ---------- Two-column layout on wide screens ---------- */
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 1.4rem;
+        }
+        @media (max-width: 620px) {
+            .row { grid-template-columns: 1fr; gap: 0; }
+            .form-card { padding: 1.6rem 1.3rem 2rem; }
+            h1 { font-size: 1.5rem; }
+        }
+
+        /* ---------- Buttons ---------- */
+        .actions {
+            display: flex;
+            gap: 0.9rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        button {
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.75rem 1.9rem;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: background 0.18s, transform 0.05s, box-shadow 0.18s;
+        }
+        button[type="submit"] {
+            background: #0b5ed7;
+            color: #ffffff;
+            box-shadow: 0 3px 10px rgba(11, 94, 215, 0.28);
+        }
+        button[type="submit"]:hover { background: #0948a8; }
+        button[type="reset"] {
+            background: #ffffff;
+            color: #40536b;
+            border-color: #c3d2e2;
+        }
+        button[type="reset"]:hover {
+            background: #f1f6fc;
+            border-color: #9fb8d1;
+        }
+        button:active { transform: translateY(1px); }
+
+        /* ---------- Footer note ---------- */
+        .form-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #7a8ea6;
+            margin-top: 1.6rem;
+        }
+        .form-note a { color: #1f5e9e; }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         STUDENT REGISTRATION FORM
+         Semantic structure:
+         - <form>       : container with method/action
+         - <label for>  : explicitly associated with every control
+         - <fieldset>   : groups related controls (gender, hobbies)
+         - <legend>     : names each group
+         - HTML5 input types: email, password, date, tel, file, radio,
+                              checkbox, select, textarea
+         - required, minlength, accept : native validation
+         ============================================================ -->
+    <main class="form-card">
+        <h1>Student Registration</h1>
+        <p class="subtitle">
+            Fill in the details below to create your student account.
+            Fields marked with <span class="req">*</span> are required.
+        </p>
+
+        <form action="/register" method="post" enctype="multipart/form-data" novalidate>
+
+            <!-- ============ 1. PERSONAL DETAILS ============ -->
+            <fieldset>
+                <legend>Personal Details</legend>
+
+                <!-- Full name — text input, required -->
+                <div class="field">
+                    <label for="fullName">Full Name <span class="req" aria-hidden="true">*</span></label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="e.g., Aarav Mehta"
+                        autocomplete="name"
+                        minlength="3"
+                        maxlength="60"
+                        required>
+                </div>
+
+                <!-- Email — HTML5 email type gives built-in format validation -->
+                <div class="field">
+                    <label for="email">Email Address <span class="req" aria-hidden="true">*</span></label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required>
+                    <span class="hint">We'll send your admission confirmation to this address.</span>
+                </div>
+
+                <!-- Password + confirm — password type masks characters -->
+                <div class="row">
+                    <div class="field">
+                        <label for="password">Password <span class="req" aria-hidden="true">*</span></label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="At least 8 characters"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required>
+                    </div>
+                    <div class="field">
+                        <label for="confirmPassword">Confirm Password <span class="req" aria-hidden="true">*</span></label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Re-enter password"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required>
+                    </div>
+                </div>
+
+                <!-- Date of birth — HTML5 date picker -->
+                <div class="field">
+                    <label for="dob">Date of Birth <span class="req" aria-hidden="true">*</span></label>
+                    <input
+                        type="date"
+                        id="dob"
+                        name="dob"
+                        min="1990-01-01"
+                        max="2012-12-31"
+                        autocomplete="bday"
+                        required>
+                </div>
+
+                <!-- Phone — HTML5 tel type (mobile keypad on phones) -->
+                <div class="field">
+                    <label for="phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="+91 98765 43210"
+                        autocomplete="tel"
+                        pattern="[+0-9\s\-()]{7,17}">
+                </div>
+            </fieldset>
+
+            <!-- ============ 2. GENDER ============ -->
+            <fieldset>
+                <legend>Gender <span class="req" aria-hidden="true">*</span></legend>
+                <!-- Radio buttons: same name = single choice -->
+                <div class="options">
+                    <label>
+                        <input type="radio" name="gender" value="female" required>
+                        Female
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="male">
+                        Male
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="non-binary">
+                        Non-binary
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="prefer-not-to-say">
+                        Prefer not to say
+                    </label>
+                </div>
+            </fieldset>
+
+            <!-- ============ 3. COURSE ============ -->
+            <fieldset>
+                <legend>Course Enrollment</legend>
+
+                <div class="row">
+                    <!-- Course dropdown — select with placeholder option -->
+                    <div class="field">
+                        <label for="course">Select Course <span class="req" aria-hidden="true">*</span></label>
+                        <select id="course" name="course" required>
+                            <option value="" selected disabled>— choose a course —</option>
+                            <optgroup label="Undergraduate">
+                                <option value="bca">BCA — Bachelor of Computer Applications</option>
+                                <option value="bsc-cs">B.Sc. Computer Science</option>
+                                <option value="btech-cse">B.Tech. Computer Science &amp; Engineering</option>
+                                <option value="bba">BBA — Business Administration</option>
+                            </optgroup>
+                            <optgroup label="Postgraduate">
+                                <option value="mca">MCA — Master of Computer Applications</option>
+                                <option value="msc-ds">M.Sc. Data Science</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- Semester -->
+                    <div class="field">
+                        <label for="semester">Semester</label>
+                        <select id="semester" name="semester">
+                            <option value="" selected disabled>— select —</option>
+                            <option value="1">Semester I</option>
+                            <option value="2">Semester II</option>
+                            <option value="3">Semester III</option>
+                            <option value="4">Semester IV</option>
+                            <option value="5">Semester V</option>
+                            <option value="6">Semester VI</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- ============ 4. HOBBIES ============ -->
+            <fieldset>
+                <legend>Hobbies &amp; Interests</legend>
+                <!-- Checkboxes: same name = multiple choices allowed -->
+                <div class="options">
+                    <label><input type="checkbox" name="hobbies" value="reading"> Reading</label>
+                    <label><input type="checkbox" name="hobbies" value="sports"> Sports</label>
+                    <label><input type="checkbox" name="hobbies" value="music"> Music</label>
+                    <label><input type="checkbox" name="hobbies" value="coding"> Coding</label>
+                    <label><input type="checkbox" name="hobbies" value="photography"> Photography</label>
+                    <label><input type="checkbox" name="hobbies" value="travel"> Travel</label>
+                    <label><input type="checkbox" name="hobbies" value="chess"> Chess</label>
+                    <label><input type="checkbox" name="hobbies" value="art"> Art &amp; Design</label>
+                </div>
+            </fieldset>
+
+            <!-- ============ 5. ADDRESS ============ -->
+            <fieldset>
+                <legend>Address</legend>
+
+                <div class="field">
+                    <label for="addressLine">Street Address <span class="req" aria-hidden="true">*</span></label>
+                    <textarea
+                        id="addressLine"
+                        name="addressLine"
+                        placeholder="House / Flat no., Street, Area"
+                        rows="2"
+                        autocomplete="street-address"
+                        required></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <label for="city">City <span class="req" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            placeholder="e.g., Bengaluru"
+                            autocomplete="address-level2"
+                            required>
+                    </div>
+                    <div class="field">
+                        <label for="pincode">PIN Code</label>
+                        <input
+                            type="text"
+                            id="pincode"
+                            name="pincode"
+                            placeholder="6-digit PIN"
+                            inputmode="numeric"
+                            pattern="[0-9]{6}"
+                            maxlength="6"
+                            autocomplete="postal-code">
+                        <span class="hint">Enter a 6-digit PIN code.</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="state">State / Region</label>
+                    <select id="state" name="state" autocomplete="address-level1">
+                        <option value="" selected disabled>— select state —</option>
+                        <option value="ka">Karnataka</option>
+                        <option value="tn">Tamil Nadu</option>
+                        <option value="mh">Maharashtra</option>
+                        <option value="dl">Delhi</option>
+                        <option value="up">Uttar Pradesh</option>
+                        <option value="wb">West Bengal</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- ============ 6. FILE UPLOAD ============ -->
+            <fieldset>
+                <legend>Documents</legend>
+
+                <div class="field">
+                    <label for="photo">Profile Photo <span class="req" aria-hidden="true">*</span></label>
+                    <input
+                        type="file"
+                        id="photo"
+                        name="photo"
+                        accept="image/png, image/jpeg, image/webp"
+                        required>
+                    <span class="hint">Upload a recent passport-size photo (JPG, PNG, or WEBP; max 2 MB).</span>
+                </div>
+
+                <div class="field">
+                    <label for="marksheet">Marksheet / Transcript</label>
+                    <input
+                        type="file"
+                        id="marksheet"
+                        name="marksheet"
+                        accept=".pdf, .jpg, .jpeg, .png">
+                    <span class="hint">Optional — PDF or scanned image of your latest marksheet.</span>
+                </div>
+            </fieldset>
+
+            <!-- ============ 7. AGREEMENT + ACTIONS ============ -->
+            <div class="field">
+                <label style="display:flex; align-items:flex-start; gap:0.55rem; font-weight:400;">
+                    <input
+                        type="checkbox"
+                        name="terms"
+                        value="agreed"
+                        style="margin-top:0.28rem;"
+                        required>
+                    <span>
+                        I confirm that the information provided is accurate and I agree to the
+                        <a href="#terms" target="_blank" rel="noopener">terms &amp; conditions</a>.
+                        <span class="req" aria-hidden="true">*</span>
+                    </span>
+                </label>
+            </div>
+
+            <!-- Submit & Reset controls -->
+            <div class="actions">
+                <button type="submit">Register</button>
+                <button type="reset">Reset Form</button>
+            </div>
+
+        </form>
+
+        <p class="form-note">
+            Already registered? <a href="#login">Sign in to your student portal</a>.
+        </p>
+    </main>
+
+</body>
+</html>

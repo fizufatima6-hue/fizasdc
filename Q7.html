@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Entity Challenge · Special Characters in HTML</title>
+    <style>
+        /* ---------- Base ---------- */
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f4f7fb;
+            color: #1b2b3c;
+            margin: 0;
+            padding: 2.2rem 1.2rem 3rem;
+            line-height: 1.6;
+        }
+
+        /* ---------- Page header ---------- */
+        header.page-header {
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+            text-align: center;
+        }
+        header.page-header h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #0b2e4f;
+            margin: 0 0 0.3rem;
+            letter-spacing: -0.3px;
+        }
+        header.page-header p {
+            margin: 0;
+            color: #5a6f85;
+            font-size: 0.96rem;
+        }
+
+        /* ---------- Section cards ---------- */
+        .card {
+            max-width: 1000px;
+            margin: 0 auto 1.6rem;
+            background: #ffffff;
+            border: 1px solid #e3ebf4;
+            border-radius: 16px;
+            padding: 1.6rem 1.9rem 1.9rem;
+            box-shadow: 0 5px 16px rgba(15, 40, 70, 0.05);
+        }
+        .card h2 {
+            margin: 0 0 0.9rem;
+            font-size: 1.22rem;
+            font-weight: 600;
+            color: #0b2e4f;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 2px solid #e7f0fa;
+            padding-bottom: 0.55rem;
+        }
+        .card h2 .emoji {
+            font-size: 1.15rem;
+            line-height: 1;
+        }
+
+        /* ---------- Reference table ---------- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.93rem;
+            margin-top: 0.4rem;
+        }
+        caption {
+            caption-side: top;
+            text-align: left;
+            font-size: 0.82rem;
+            color: #7a8ea6;
+            padding-bottom: 0.6rem;
+        }
+        thead th {
+            background: #0b2e4f;
+            color: #ffffff;
+            font-weight: 500;
+            text-align: left;
+            padding: 0.65rem 0.85rem;
+            font-size: 0.82rem;
+            letter-spacing: 0.3px;
+            border: 1px solid #1a4670;
+        }
+        tbody td {
+            border: 1px solid #e0e9f2;
+            padding: 0.6rem 0.85rem;
+            vertical-align: middle;
+        }
+        tbody tr:nth-child(even) {
+            background: #f9fbfe;
+        }
+        /* The rendered character column — large and centered */
+        td.char-cell {
+            font-size: 1.5rem;
+            text-align: center;
+            width: 90px;
+            color: #0b2e4f;
+        }
+        /* The reference code column — monospaced */
+        td.ref-cell {
+            font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+            font-size: 0.86rem;
+            color: #b0345a;
+            background: #fdf6f9;
+            white-space: nowrap;
+            width: 150px;
+        }
+        td.desc-cell { color: #3e556d; }
+        td.example-cell {
+            font-size: 0.88rem;
+            color: #4b5f75;
+            font-style: italic;
+        }
+
+        /* ---------- Live example blocks ---------- */
+        .example-box {
+            background: #f6faff;
+            border: 1px solid #d8e6f4;
+            border-left: 4px solid #2f7bd6;
+            border-radius: 0 10px 10px 0;
+            padding: 0.9rem 1.2rem;
+            margin: 0.9rem 0 0;
+            font-size: 0.93rem;
+            color: #24415f;
+        }
+        .example-box code {
+            font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+            background: #e8f1fb;
+            color: #0b4a85;
+            padding: 0.1rem 0.4rem;
+            border-radius: 5px;
+            font-size: 0.86rem;
+        }
+
+        /* ---------- Footer ---------- */
+        footer.page-footer {
+            max-width: 1000px;
+            margin: 2.4rem auto 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7a8ea6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ PAGE HEADER ============ -->
+    <header class="page-header">
+        <h1>Character Entity Challenge</h1>
+        <p>Displaying mathematical symbols, copyright marks, quotations, angle brackets &amp; more — the right way</p>
+    </header>
+
+    <!-- ============================================================
+         1. MATHEMATICAL SYMBOLS
+         Why entities? These characters are not on every keyboard,
+         and some (like < and >) collide with HTML syntax.
+         ============================================================ -->
+    <section class="card">
+        <h2><span class="emoji" aria-hidden="true">∑</span> Mathematical Symbols</h2>
+        <table>
+            <caption>Mathematical and scientific symbols with their character references</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Character</th>
+                    <th scope="col">Reference</th>
+                    <th scope="col">Name / Description</th>
+                    <th scope="col">Used in context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="char-cell">&plus;</td>
+                    <td class="ref-cell">&amp;plus;</td>
+                    <td class="desc-cell">Plus sign</td>
+                    <td class="example-cell">a &plus; b</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&minus;</td>
+                    <td class="ref-cell">&amp;minus;</td>
+                    <td class="desc-cell">Minus sign</td>
+                    <td class="example-cell">x &minus; y</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&times;</td>
+                    <td class="ref-cell">&amp;times;</td>
+                    <td class="desc-cell">Multiplication sign</td>
+                    <td class="example-cell">3 &times; 4 = 12</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&divide;</td>
+                    <td class="ref-cell">&amp;divide;</td>
+                    <td class="desc-cell">Division sign</td>
+                    <td class="example-cell">10 &divide; 2 = 5</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&ne;</td>
+                    <td class="ref-cell">&amp;ne;</td>
+                    <td class="desc-cell">Not equal to</td>
+                    <td class="example-cell">x &ne; 0</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&le;</td>
+                    <td class="ref-cell">&amp;le;</td>
+                    <td class="desc-cell">Less than or equal to</td>
+                    <td class="example-cell">a &le; b</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&ge;</td>
+                    <td class="ref-cell">&amp;ge;</td>
+                    <td class="desc-cell">Greater than or equal to</td>
+                    <td class="example-cell">y &ge; 0</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&sum;</td>
+                    <td class="ref-cell">&amp;sum;</td>
+                    <td class="desc-cell">N-ary summation</td>
+                    <td class="example-cell">&sum; (i = 1 to n) i</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&radic;</td>
+                    <td class="ref-cell">&amp;radic;</td>
+                    <td class="desc-cell">Square root</td>
+                    <td class="example-cell">&radic; 16 = 4</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&infin;</td>
+                    <td class="ref-cell">&amp;infin;</td>
+                    <td class="desc-cell">Infinity</td>
+                    <td class="example-cell">lim x &rarr; &infin;</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&pi;</td>
+                    <td class="ref-cell">&amp;pi;</td>
+                    <td class="desc-cell">Greek small letter pi</td>
+                    <td class="example-cell">Area = &pi; r&sup2;</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&deg;</td>
+                    <td class="ref-cell">&amp;deg;</td>
+                    <td class="desc-cell">Degree sign</td>
+                    <td class="example-cell">180&deg; = &pi; radians</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="example-box">
+            <strong>Live example:</strong>
+            The area of a circle is <code>&amp;pi; r&amp;sup2;</code>, and since &pi; &asymp; 3.14159,
+            a circle of radius 2 has area &asymp; 12.566 &times; 1&nbsp;unit&sup2;.
+        </div>
+    </section>
+
+    <!-- ============================================================
+         2. COPYRIGHT & LEGAL SYMBOLS
+         ============================================================ -->
+    <section class="card">
+        <h2><span class="emoji" aria-hidden="true">©</span> Copyright &amp; Legal Symbols</h2>
+        <table>
+            <caption>Trademark and copyright references</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Character</th>
+                    <th scope="col">Reference</th>
+                    <th scope="col">Name / Description</th>
+                    <th scope="col">Used in context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="char-cell">&copy;</td>
+                    <td class="ref-cell">&amp;copy;</td>
+                    <td class="desc-cell">Copyright sign</td>
+                    <td class="example-cell">&copy; 2025 Aarav Mehta</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&reg;</td>
+                    <td class="ref-cell">&amp;reg;</td>
+                    <td class="desc-cell">Registered trademark</td>
+                    <td class="example-cell">TechFest&reg; is a registered event</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&trade;</td>
+                    <td class="ref-cell">&amp;trade;</td>
+                    <td class="desc-cell">Trademark sign</td>
+                    <td class="example-cell">CodeLab&trade; platform</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&sect;</td>
+                    <td class="ref-cell">&amp;sect;</td>
+                    <td class="desc-cell">Section sign</td>
+                    <td class="example-cell">See &sect; 4.2 of the policy</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&para;</td>
+                    <td class="ref-cell">&amp;para;</td>
+                    <td class="desc-cell">Pilcrow / paragraph sign</td>
+                    <td class="example-cell">&para; Introduction</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="example-box">
+            <strong>Live example:</strong>
+            &copy; 2025 Department of Computer Science. All rights reserved.
+            &ldquo;NIT Trichy&rdquo; and the department logo are trademarks&trade; of the institute.
+            Brand names referenced remain the property of their respective owners&reg;.
+        </div>
+    </section>
+
+    <!-- ============================================================
+         3. QUOTATION MARKS
+         Curly quotes are typographically correct, but their literal
+         forms depend on the text encoding. Entities guarantee the
+         right shape regardless of the file's encoding.
+         ============================================================ -->
+    <section class="card">
+        <h2><span class="emoji" aria-hidden="true">&ldquo;</span> Quotation Marks &amp; Apostrophes</h2>
+        <table>
+            <caption>Typographic quotation references</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Character</th>
+                    <th scope="col">Reference</th>
+                    <th scope="col">Name / Description</th>
+                    <th scope="col">Used in context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="char-cell">&ldquo;</td>
+                    <td class="ref-cell">&amp;ldquo;</td>
+                    <td class="desc-cell">Left double quotation mark</td>
+                    <td class="example-cell">&ldquo;Knowledge is power&rdquo;</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&rdquo;</td>
+                    <td class="ref-cell">&amp;rdquo;</td>
+                    <td class="desc-cell">Right double quotation mark</td>
+                    <td class="example-cell">&ldquo;Knowledge is power&rdquo;</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&lsquo;</td>
+                    <td class="ref-cell">&amp;lsquo;</td>
+                    <td class="desc-cell">Left single quotation mark</td>
+                    <td class="example-cell">&lsquo;Hello&rsquo;</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&rsquo;</td>
+                    <td class="ref-cell">&amp;rsquo;</td>
+                    <td class="desc-cell">Right single quotation mark / apostrophe</td>
+                    <td class="example-cell">It&rsquo;s a student&rsquo;s right</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&laquo;</td>
+                    <td class="ref-cell">&amp;laquo;</td>
+                    <td class="desc-cell">Left-pointing double angle quotation mark</td>
+                    <td class="example-cell">&laquo; Continue reading</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&raquo;</td>
+                    <td class="ref-cell">&amp;raquo;</td>
+                    <td class="desc-cell">Right-pointing double angle quotation mark</td>
+                    <td class="example-cell">Read more &raquo;</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="example-box">
+            <strong>Live example:</strong>
+            &ldquo;The best way to predict the future is to invent it.&rdquo; &mdash; Alan Kay<br>
+            The professor said, &lsquo;Submit your assignment by Friday.&rsquo; It&rsquo;s due at 5&nbsp;PM.
+        </div>
+    </section>
+
+    <!-- ============================================================
+         4. ANGLE BRACKETS (the critical ones!)
+         Literal < and > inside HTML would be parsed as the start/end
+         of a tag, breaking the page. They MUST be written as entities.
+         ============================================================ -->
+    <section class="card">
+        <h2><span class="emoji" aria-hidden="true">&lt;/&gt;</span> Angle Brackets &amp; Code Characters</h2>
+        <table>
+            <caption>Characters that collide with HTML syntax</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Character</th>
+                    <th scope="col">Reference</th>
+                    <th scope="col">Name / Description</th>
+                    <th scope="col">Used in context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="char-cell">&lt;</td>
+                    <td class="ref-cell">&amp;lt;</td>
+                    <td class="desc-cell">Less-than sign / opening angle bracket</td>
+                    <td class="example-cell">&lt;div&gt; paragraph &lt;/div&gt;</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&gt;</td>
+                    <td class="ref-cell">&amp;gt;</td>
+                    <td class="desc-cell">Greater-than sign / closing angle bracket</td>
+                    <td class="example-cell">if (a &gt; b) { ... }</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&amp;</td>
+                    <td class="ref-cell">&amp;amp;</td>
+                    <td class="desc-cell">Ampersand</td>
+                    <td class="example-cell">Tom &amp; Jerry</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&quot;</td>
+                    <td class="ref-cell">&amp;quot;</td>
+                    <td class="desc-cell">Straight double quotation mark</td>
+                    <td class="example-cell">class=&quot;highlight&quot;</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&apos;</td>
+                    <td class="ref-cell">&amp;apos;</td>
+                    <td class="desc-cell">Straight apostrophe / single quote</td>
+                    <td class="example-cell">let x = 'value';</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="example-box">
+            <strong>Live example (code displayed as text):</strong><br>
+            To create a paragraph in HTML, write
+            <code>&amp;lt;p&amp;gt;Hello&amp;lt;/p&amp;gt;</code>,
+            which renders on the page as <code>&lt;p&gt;Hello&lt;/p&gt;</code>.
+            Use <code>&amp;lt;</code> and <code>&amp;gt;</code> whenever you want to
+            <em>show</em> HTML tags to the reader rather than have the browser execute them.
+        </div>
+    </section>
+
+    <!-- ============================================================
+         5. OTHER SPECIAL CHARACTERS
+         ============================================================ -->
+    <section class="card">
+        <h2><span class="emoji" aria-hidden="true">&amp;</span> Other Useful Special Characters</h2>
+        <table>
+            <caption>Currency, dashes, spacing, and miscellaneous references</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Character</th>
+                    <th scope="col">Reference</th>
+                    <th scope="col">Name / Description</th>
+                    <th scope="col">Used in context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="char-cell">&euro;</td>
+                    <td class="ref-cell">&amp;euro;</td>
+                    <td class="desc-cell">Euro sign</td>
+                    <td class="example-cell">&euro; 50</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&pound;</td>
+                    <td class="ref-cell">&amp;pound;</td>
+                    <td class="desc-cell">Pound sterling</td>
+                    <td class="example-cell">&pound; 20</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&yen;</td>
+                    <td class="ref-cell">&amp;yen;</td>
+                    <td class="desc-cell">Yen sign</td>
+                    <td class="example-cell">&yen; 1000</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&ndash;</td>
+                    <td class="ref-cell">&amp;ndash;</td>
+                    <td class="desc-cell">En dash</td>
+                    <td class="example-cell">2019&ndash;2025</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&mdash;</td>
+                    <td class="ref-cell">&amp;mdash;</td>
+                    <td class="desc-cell">Em dash</td>
+                    <td class="example-cell">Learning &mdash; a lifelong journey</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&hellip;</td>
+                    <td class="ref-cell">&amp;hellip;</td>
+                    <td class="desc-cell">Horizontal ellipsis</td>
+                    <td class="example-cell">Loading&hellip;</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&nbsp;</td>
+                    <td class="ref-cell">&amp;nbsp;</td>
+                    <td class="desc-cell">Non-breaking space</td>
+                    <td class="example-cell">10&nbsp;km (keeps 10 and km together)</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&rarr;</td>
+                    <td class="ref-cell">&amp;rarr;</td>
+                    <td class="desc-cell">Rightwards arrow</td>
+                    <td class="example-cell">Next &rarr;</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&larr;</td>
+                    <td class="ref-cell">&amp;larr;</td>
+                    <td class="desc-cell">Leftwards arrow</td>
+                    <td class="example-cell">&larr; Back</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&hearts;</td>
+                    <td class="ref-cell">&amp;hearts;</td>
+                    <td class="desc-cell">Black heart suit</td>
+                    <td class="example-cell">Made with &hearts; by students</td>
+                </tr>
+                <tr>
+                    <td class="char-cell">&check;</td>
+                    <td class="ref-cell">&amp;check;</td>
+                    <td class="desc-cell">Check mark</td>
+                    <td class="example-cell">Completed &check;</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="example-box">
+            <strong>Live example:</strong>
+            The workshop fee is &euro;&nbsp;50 (or &pound;&nbsp;42 / &yen;&nbsp;8000).
+            Sessions run from 2019&ndash;2025 &mdash; every weekday. Loading&hellip;
+            <br>
+            Click &larr; Back or Next &rarr; to navigate. &check; All tasks complete. &hearts;
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="page-footer">
+        <p>&copy; 2025 Character Entity Challenge &middot; Built with semantic HTML &amp; named references</p>
+        <p>All symbols rendered using character references for reliability across encodings.</p>
+    </footer>
+
+</body>
+</html>
